@@ -1,5 +1,12 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
+use Microblog\Usuario;
+
+$usuario = new Usuario;
+
+$listaUsuarios = $usuario->lerUsuarios();
+var_dump($listaUsuarios)
+
 ?>
 
 
@@ -30,10 +37,14 @@ require_once "../inc/cabecalho-admin.php";
 
 				<tbody>
 
+					<?php foreach ($listaUsuarios as $usuarios) {?>
 					<tr>
-						<td> Nome... </td>
-						<td> E-mail... </td>
-						<td> Tipo... </td>
+
+						<td><?=$usuarios['nome']?></td>
+						<td><?=$usuarios['email']?></td>
+						<td><?=$usuarios['tipo']?></td>
+						<?php }?>
+
 						<td class="text-center">
 							<a class="btn btn-warning" 
 							href="usuario-atualiza.php">

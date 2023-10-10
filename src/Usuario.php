@@ -34,13 +34,28 @@
         }
 
 
+        public function lerUsuarios():array {
+            $sql = "SELECT nome, email, tipo FROM usuarios";
+
+            try {
+                $consulta = $this->conexao->prepare($sql);
+                $consulta->execute();
+                $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            } catch (Exception $erro) {
+                die("Erro ao carregar usuarios: ".$erro->getMessage());
+            }
+            return $resultado;
+        }
+
+
+
+
+
         // métodos para codificação e comparação de senha
 
         public function codificaSenha(string $senha):string {
             return password_hash($senha, PASSWORD_DEFAULT);
         }
-
-
 
 
 
