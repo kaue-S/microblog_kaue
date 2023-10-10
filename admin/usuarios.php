@@ -1,11 +1,8 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
 use Microblog\Usuario;
-
 $usuario = new Usuario;
-
-$listaUsuarios = $usuario->lerUsuarios();
-var_dump($listaUsuarios)
+$listaDeUsuarios = $usuario->listar();
 
 ?>
 
@@ -14,7 +11,7 @@ var_dump($listaUsuarios)
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
 		
 		<h2 class="text-center">
-		Usuários <span class="badge bg-dark">X</span>
+		Usuários <span class="badge bg-dark"><?=count($listaDeUsuarios)?></span>
 		</h2>
 
 		<p class="text-center mt-5">
@@ -37,24 +34,24 @@ var_dump($listaUsuarios)
 
 				<tbody>
 
-					<?php foreach ($listaUsuarios as $usuarios) {?>
+					<?php foreach ( $listaDeUsuarios as $usuarios ) {?>
 					<tr>
 
 						<td><?=$usuarios['nome']?></td>
 						<td><?=$usuarios['email']?></td>
 						<td><?=$usuarios['tipo']?></td>
-						<?php }?>
-
+						
 						<td class="text-center">
 							<a class="btn btn-warning" 
-							href="usuario-atualiza.php">
+							href="usuario-atualiza.php?id=<?=$usuarios['id']?>">
 							<i class="bi bi-pencil"></i> Atualizar
-							</a>
+						</a>
 						
-							<a class="btn btn-danger excluir" 
-							href="usuario-exclui.php">
-							<i class="bi bi-trash"></i> Excluir
-							</a>
+						<a class="btn btn-danger excluir" 
+						href="usuario-exclui.php?id=<?=$usuarios['id']?>">
+						<i class="bi bi-trash"></i> Excluir
+					</a>
+					<?php }?>
 						</td>
 					</tr>
 

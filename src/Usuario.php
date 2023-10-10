@@ -34,8 +34,8 @@
         }
 
 
-        public function lerUsuarios():array {
-            $sql = "SELECT nome, email, tipo FROM usuarios";
+        public function listar():array {
+            $sql = "SELECT * FROM usuarios ORDER BY nome";
 
             try {
                 $consulta = $this->conexao->prepare($sql);
@@ -46,9 +46,6 @@
             }
             return $resultado;
         }
-
-
-
 
 
         // métodos para codificação e comparação de senha
