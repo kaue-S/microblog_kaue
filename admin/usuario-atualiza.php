@@ -11,7 +11,7 @@ if(isset($_POST['atualizar'])){
 	$usuario->setNome($_POST['nome']);
 	$usuario->setEmail($_POST['email']);
 	$usuario->setTipo($_POST['tipo']);
-	header("location:usuario.php");
+	header("location:usuarios.php");
 }
 ?>
 
@@ -44,8 +44,8 @@ if(isset($_POST['atualizar'])){
 				<label class="form-label" for="tipo">Tipo:</label>
 				<select class="form-select" name="tipo" id="tipo"  required>
 					<option value=""></option>
-					<option value="editor">Editor</option>
-					<option value="admin">Administrador</option>
+					<option <?php if($dados['tipo'] === 'editor') echo " selected "; ?> value="editor">Editor</option>
+					<option <?php if($dados['tipo'] === 'admin') echo " selected "; ?> value="admin">Administrador</option>
 				</select>
 			</div>
 			
