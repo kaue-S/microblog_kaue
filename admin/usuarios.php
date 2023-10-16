@@ -49,7 +49,7 @@ $listaDeUsuarios = $usuario->listar();
 							<i class="bi bi-pencil"></i> Atualizar
 						</a>
 						
-						<a class="btn btn-danger excluir" 
+						<a class="btn btn-danger excluir"
 						href="usuario-exclui.php?id=<?=$usuarios['id']?>">
 						<i class="bi bi-trash"></i> Excluir
 					</a>
@@ -62,6 +62,7 @@ $listaDeUsuarios = $usuario->listar();
 	</div>
 		
 	</article>
+	<script src="../js/confirmar-exclusao.js"></script>
 </div>
 
 
