@@ -89,6 +89,16 @@
             return password_hash($senha, PASSWORD_DEFAULT);
         }
 
+        // usamos a função password verify para comparar as duas senhas; a digitada no formulario e a existente no banco de dados
+        public function verificaSenha( string $senhaFormulario, string $senhaBanco): string {
+            if (password_verify($senhaFormulario, $senhaBanco)){
+                //se forem iguais, mantemos a senha já existente, sem qualquer modificação.
+                return $senhaBanco;
+            } else {
+                //se forem diferentes, então a nova senha(ou seja, a que foi digitada no formulário deve ser codificada).
+                return $this->codificaSenha($senhaFormulario);
+            }
+        }
 
         public function getId(): int{
                 return $this->id;
