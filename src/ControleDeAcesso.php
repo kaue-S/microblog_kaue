@@ -11,11 +11,12 @@
 
         public function verificaAcesso():void {
             //se não exisitir uma variável de sessãob cahamada "id" (ou seja, ainda nao houve login po rparte do usuário).
-            if( !isset($_SESSION['id']) )
+            if( !isset($_SESSION['id']) ){
             //então destrua qualquer sessão e redirecione para a pagina de login e encerre.
             session_destroy();
-            header("location:../login.php");
+            header("location:../login.php?acesso_proibido");
             die();
+            }
         }
         
 
@@ -25,8 +26,11 @@
             $_SESSION['nome'] = $nome;
             $_SESSION['tipo'] = $tipo;
         }
+
+        public function logout() : void {
+            session_start();
+            session_destroy();
+            header("location:../login.php?logout");
+            die();
+        }
     }
-
-
-
-?>
