@@ -56,7 +56,7 @@ use PDO, Exception;
             }
         }
 
-
+        
         public function ler():array {
             $sql = "SELECT * FROM categorias";
 
