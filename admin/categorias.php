@@ -1,5 +1,7 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
+
+
 ?>
 
 
@@ -29,7 +31,7 @@ require_once "../inc/cabecalho-admin.php";
 				<tbody>
 
 					<tr>
-						<td> Nome... </td>
+						<td></td>
 						<td class="text-center">
 							<a class="btn btn-warning" 
 							href="categoria-atualiza.php">
