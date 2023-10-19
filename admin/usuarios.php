@@ -63,7 +63,7 @@ $listaDeUsuarios = $usuario->listar();
 	</div>
 		
 	</article>
-	<script src="../js/confirmar-exclusao.js"></script>
+
 </div>
 
 
