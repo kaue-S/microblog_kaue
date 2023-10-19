@@ -2,6 +2,7 @@
 require_once "../inc/cabecalho-admin.php";
 use Microblog\Categoria;
 $categoria = new Categoria;
+$sessao->verificaAcessoAdmin();
 
 if(isset($_POST['inserir'])){
 	$categoria = new Categoria;
