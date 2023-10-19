@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Out-2023 às 16:50
+-- Tempo de geração: 10-Out-2023 às 16:48
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -67,6 +67,15 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `tipo`) VALUES
+(4, 'kaue', 'kauesilva38@gmail.com', '$2y$10$tCh6JfcMBdmxVTmmPQooTuqwHdtvkFqtr/fmenzfLEZseQnr3FOOK', 'admin'),
+(6, 'carlos', 'kaue@123.com', '$2y$10$Ph9zp5UhxgyRwjyVyb2BCexynaGrwRvLovr42wvnkT717Q3Y8G0ZG', 'editor'),
+(7, 'zezinho', 'kaue506@gmail.com', '$2y$10$W.aUc2RwGoP.CLXKzE26ZunuD2F6XQOE1LYZdkqE08zMwEPmPAWBC', 'editor');
+
+--
 -- Índices para tabelas despejadas
 --
 
@@ -111,7 +120,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para despejos de tabelas

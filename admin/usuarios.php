@@ -1,5 +1,11 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
+use Microblog\Usuario;
+use Microblog\Utilitarios;
+
+$usuario = new Usuario;
+$listaDeUsuarios = $usuario->listar();
+
 ?>
 
 
@@ -7,7 +13,7 @@ require_once "../inc/cabecalho-admin.php";
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
 		
 		<h2 class="text-center">
-		Usuários <span class="badge bg-dark">X</span>
+		Usuários <span class="badge bg-dark"><?=count($listaDeUsuarios)?></span>
 		</h2>
 
 		<p class="text-center mt-5">
@@ -30,20 +36,24 @@ require_once "../inc/cabecalho-admin.php";
 
 				<tbody>
 
+					<?php foreach ( $listaDeUsuarios as $usuarios ) {?>
 					<tr>
-						<td> Nome... </td>
-						<td> E-mail... </td>
-						<td> Tipo... </td>
+
+						<td><?=$usuarios['nome']?></td>
+						<td><?=$usuarios['email']?></td>
+						<td><?=$usuarios['tipo']?></td>
+						
 						<td class="text-center">
 							<a class="btn btn-warning" 
-							href="usuario-atualiza.php">
+							href="usuario-atualiza.php?id=<?=$usuarios['id']?>">
 							<i class="bi bi-pencil"></i> Atualizar
-							</a>
+						</a>
 						
-							<a class="btn btn-danger excluir" 
-							href="usuario-exclui.php">
-							<i class="bi bi-trash"></i> Excluir
-							</a>
+						<a class="btn btn-danger excluir"
+						href="usuario-exclui.php?id=<?=$usuarios['id']?>">
+						<i class="bi bi-trash"></i> Excluir
+					</a>
+					<?php }?>
 						</td>
 					</tr>
 
@@ -52,6 +62,7 @@ require_once "../inc/cabecalho-admin.php";
 	</div>
 		
 	</article>
+	<script src="../js/confirmar-exclusao.js"></script>
 </div>
 
 
