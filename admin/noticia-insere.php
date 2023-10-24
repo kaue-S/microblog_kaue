@@ -9,21 +9,25 @@ $noticia = new Noticia;
 $listaCategoria = $noticia->categoria->ler();
 
 if(isset($_POST['inserir'])){
-	$noticia->setTitulo($_POST['titulo']);
-	$noticia->setTexto($_POST['texto']);
-	$noticia->setResumo($_POST['resumo']);
-	$noticia->setDestaque($_POST['destaque']);
+	$noticia->setTitulo($_POST["titulo"]);
+	$noticia->setTexto($_POST["texto"]);
+	$noticia->setResumo($_POST["resumo"]);
+	$noticia->setDestaque($_POST["destaque"]);
 
 	//ID do usuário que está inserindo a notícia
-	$noticia->usuario->setId($_SESSION['id']);
+	$noticia->usuario->setId($_SESSION["id"]);
 	
 
 	//ID da categoria escolhida para a notícia
-	$noticia->categoria->setId($_POST['categoria']);
+	$noticia->categoria->setId($_POST["categoria"]);
 
 	/* sobre a imagem
 	 - capturar o arquivo de imagem e enviar para o servidor
 	 - capturar o nome e extensão e enviar para o banco de dados */
+
+	 $imagem = $_FILES["imagem"];
+
+	 Utilitarios::dump($imagem);
 
 }
 

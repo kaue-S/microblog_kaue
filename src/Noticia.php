@@ -49,6 +49,29 @@
 
 
 
+        public function updload(array $arquivo):void {
+                //definindo tipos válidos
+                $tiposValidos = ["image/png", "image/jpeg", "image/gif", "image/svg+xml"];
+
+                if( !in_array($arquivo["type"], $tiposValidos) ){
+                        die("<script>
+                        alert('formato inválido!');
+                        history.back();
+                        </script>");
+                }
+
+                //ACessando apenas o nome/extensão do aruivo
+                $nome = $arquivo["name"];
+
+                //Acessando os dados de acesso temporários
+                $temporario = $arquivo["tmp_name"];
+
+                //Definindo a pasta de destino das imagens no site
+                $pastaFinal = "../imagens/".$nome;
+
+                move_uploaded_file($temporario, $pastaFinal);
+        }
+
 
 
 
