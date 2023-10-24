@@ -2,7 +2,7 @@
     namespace Microblog;
     use PDO, Exception;
 
-    final class noticia {
+    final class Noticia {
         private int $id;
         private string $data;
         private string $titulo;
@@ -12,6 +12,20 @@
         private string $termo; // para usar na busca
         private PDO $conexao;
 
+        //propriedades cujo tipo estão associados à classes já existentes, isso permitirá usar recursos destas classes à partir de Noticia.
+        public Usuario $usuario;
+        public Categoria $categoria;
+
+        public function __construct(){
+                //ao criar um objeto Noticia, aproveitamos para instanciar objetos de Usuario e Categoria
+                $this->usuario = new Usuario;
+                $this->categoria = new Categoria;
+
+
+                $this->conexao = Banco::conecta();
+        }
+        
+
         
         public function getId(): int
         {
@@ -20,7 +34,7 @@
 
         public function setId(int $id): self
         {
-                $this->id = $id;
+                $this->id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
                 return $this;
         }
@@ -33,7 +47,7 @@
    
         public function setData(string $data): self
         {
-                $this->data = $data;
+                $this->data = filter_var($data, FILTER_SANITIZE_SPECIAL_CHARS);
 
                 return $this;
         }
@@ -46,7 +60,7 @@
 
         public function setTitulo(string $titulo): self
         {
-                $this->titulo = $titulo;
+                $this->titulo = filter_var($titulo, FILTER_SANITIZE_SPECIAL_CHARS);
 
                 return $this;
         }
@@ -60,7 +74,7 @@
 
         public function setResumo(string $resumo): self
         {
-                $this->resumo = $resumo;
+                $this->resumo = filter_var($resumo, FILTER_SANITIZE_SPECIAL_CHARS); 
 
                 return $this;
         }
@@ -74,7 +88,7 @@
    
         public function setImagem(string $imagem): self
         {
-                $this->imagem = $imagem;
+                $this->imagem = filter_var($imagem, FILTER_SANITIZE_SPECIAL_CHARS);
 
                 return $this;
         }
@@ -88,7 +102,7 @@
     
         public function setDestaque(string $destaque): self
         {
-                $this->destaque = $destaque;
+                $this->destaque = filter_var($destaque, FILTER_SANITIZE_SPECIAL_CHARS);
 
                 return $this;
         }
@@ -101,7 +115,7 @@
   
         public function setTermo(string $termo): self
         {
-                $this->termo = $termo;
+                $this->termo = filter_var($termo, FILTER_SANITIZE_SPECIAL_CHARS);
 
                 return $this;
         }

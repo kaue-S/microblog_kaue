@@ -3,7 +3,7 @@
 
     abstract class Utilitarios {
         //o parâmetro pode se array ou boleano
-        public static function dump(array | bool $dados):void {
+        public static function dump(array | bool | object $dados):void {
             echo "<pre>";
             var_dump($dados);
             echo "</pre>";
