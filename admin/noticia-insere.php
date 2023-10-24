@@ -8,6 +8,25 @@ use Microblog\Utilitarios;
 $noticia = new Noticia;
 $listaCategoria = $noticia->categoria->ler();
 
+if(isset($_POST['inserir'])){
+	$noticia->setTitulo($_POST['titulo']);
+	$noticia->setTexto($_POST['texto']);
+	$noticia->setResumo($_POST['resumo']);
+	$noticia->setDestaque($_POST['destaque']);
+
+	//ID do usuário que está inserindo a notícia
+	$noticia->usuario->setId($_SESSION['id']);
+	
+
+	//ID da categoria escolhida para a notícia
+	$noticia->categoria->setId($_POST['categoria']);
+
+	/* sobre a imagem
+	 - capturar o arquivo de imagem e enviar para o servidor
+	 - capturar o nome e extensão e enviar para o banco de dados */
+
+}
+
 
 ?>
 
@@ -19,7 +38,7 @@ $listaCategoria = $noticia->categoria->ler();
 		Inserir nova notícia
 		</h2>
 				
-		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir">
+		<form class="mx-auto w-75" action="" method="post" id="form-inserir" name="form-inserir" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label class="form-label" for="categoria">Categoria:</label>
@@ -27,7 +46,7 @@ $listaCategoria = $noticia->categoria->ler();
 					<option value=""></option>
 
 					<?php foreach($listaCategoria as $categorias){ ?>
-						<option value=""><?=$categorias["nome"]?></option>
+						<option value="<?=$categorias["id"]?>"><?=$categorias["nome"]?></option>
 					<?php }?>
 
 				</select>
