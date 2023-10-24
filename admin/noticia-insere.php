@@ -25,9 +25,19 @@ if(isset($_POST['inserir'])){
 	 - capturar o arquivo de imagem e enviar para o servidor
 	 - capturar o nome e extensão e enviar para o banco de dados */
 
+	 //capturar o arquivo de imagem
 	 $imagem = $_FILES["imagem"];
 
-	 Utilitarios::dump($imagem);
+	 //enviar para o servidor
+	 $noticia->updload($imagem);
+
+	//captura o nome e extensão
+	$noticia->setImagem($imagem["name"]);
+
+	//Executar no banco
+	$noticia->inserir();
+
+	header("location:noticias.php");
 
 }
 

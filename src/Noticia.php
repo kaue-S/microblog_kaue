@@ -28,7 +28,7 @@
         
 
         public function inserir():void {
-                $sql = "INSERT INTO noticias(titulo, texto, resumo, imagem, destaque, usuario_id, categoria_id) VALUES (:titulo, :texto: :resumo, :imagem, :destaque, :usuario_id, :categoria_id)";
+                $sql = "INSERT INTO noticias (titulo, texto, resumo, imagem, destaque, usuario_id, categoria_id) VALUES (:titulo, :texto, :resumo, :imagem, :destaque, :usuario_id, :categoria_id)";
 
                 try {
                         $consulta = $this->conexao->prepare($sql);
@@ -38,10 +38,10 @@
                         $consulta->bindValue(":imagem", $this->imagem, PDO::PARAM_STR);
                         $consulta->bindValue(":destaque", $this->destaque, PDO::PARAM_STR);
 
-
                         //AQUI, chamamos os getter de ID do Usuario e de Categoria, para só depois os valores aos parâmetros da consulta SQL. isso é possível devido à associação entre classes.
                         $consulta->bindValue(":usuario_id", $this->usuario->getId(), PDO::PARAM_INT);
                         $consulta->bindValue(":categoria_id", $this->categoria->getId(), PDO::PARAM_INT);
+                        $consulta->execute();
                 } catch (Exception $erro) {
                         die("Erro ao inserir noticia: ".$erro->getMessage());
                 }
@@ -71,11 +71,6 @@
 
                 move_uploaded_file($temporario, $pastaFinal);
         }
-
-
-
-
-
 
 
         
