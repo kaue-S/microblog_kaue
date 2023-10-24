@@ -1,12 +1,12 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
 
-use Microblog\Categoria;
+
 use Microblog\Noticia;
 use Microblog\Utilitarios;
 
-$categoria = new Categoria;
-$listaCategoria = $categoria->ler();
+$noticia = new Noticia;
+$listaCategoria = $noticia->categoria->ler();
 
 
 ?>
@@ -29,7 +29,7 @@ $listaCategoria = $categoria->ler();
 					<?php foreach($listaCategoria as $categorias){ ?>
 						<option value=""><?=$categorias["nome"]?></option>
 					<?php }?>
-					
+
 				</select>
 			</div>
 
