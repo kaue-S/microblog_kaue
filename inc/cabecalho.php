@@ -5,6 +5,8 @@
 
   $noticia = new Noticia;
 
+  $listaDeCategorias = $noticia->categoria->ler();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
@@ -41,9 +43,15 @@
             Categorias
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Ciência</a></li>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Educação</a></li>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Tecnologia</a></li>
+
+            <?php foreach( $listaDeCategorias as $categorias ){ ?>
+
+              <li>
+                <a class="dropdown-item" href="noticias-por-categoria.php?id=<?=$categorias['id']?>"><?=$categorias['nome']?></a>
+              </li>
+
+            <?php } ?>
+            
           </ul>
         </li>
         <li class="nav-item">
