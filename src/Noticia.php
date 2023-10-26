@@ -160,16 +160,6 @@
                 }
         }
 
-
-
-
-
-
-
-
-
-
-
         public function updload(array $arquivo):void {
                 //definindo tipos válidos
                 $tiposValidos = ["image/png", "image/jpeg", "image/gif", "image/svg+xml"];
@@ -192,6 +182,43 @@
 
                 move_uploaded_file($temporario, $pastaFinal);
         }
+
+
+        //Métodos da área pública
+
+
+        public function listarDestaques():array{
+                $sql = "SELECT id, titulo, resumo, imagem FROM noticias WHERE destaque = :destaque ORDER BY data DESC";
+
+                try {
+                        $consulta = $this->conexao->prepare($sql);
+                        $consulta->bindValue(":destaque", $this->destaque, PDO::PARAM_STR);
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+                } catch (\Exception $erro) {
+                        die("Erro ao carregar destaques: ".$erro->getMessage());
+                }
+
+                return $resultado;
+
+        }
+
+        public function listarTodas():array{
+                $sql = "SELECT id, data, titulo, resumo FROM noticias ORDER BY data DESC";
+
+                try {
+                        $consulta = $this->conexao->prepare($sql);
+                        $consulta->execute();
+                        $resultado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+                } catch (\Exception $erro) {
+                        die("Erro ao carregar notícias: ".$erro->getMessage());
+                }
+
+                return $resultado;
+        }
+
+
+
 
 
 
