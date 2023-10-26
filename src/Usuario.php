@@ -111,6 +111,25 @@
             }
         }
 
+
+        //método para buscar no banco um usuário através do email
+        public function buscar():array | bool { //tipos de saidas +php 7.4
+            $sql = "SELECT * FROM usuarios WHERE email = :email";
+
+            try {
+                $consulta = $this->conexao->prepare($sql);
+                $consulta->bindValue(":email", $this->email, PDO::PARAM_STR);
+                $consulta->execute();
+                $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            } catch (Exception $erro) {
+                die("Erro ao buscar usuário: ".$erro->getMessage());
+            }
+
+            return $resultado;
+        }
+
+
+
         public function getId(): int{
                 return $this->id;
         }

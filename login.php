@@ -1,7 +1,23 @@
 <?php 
-require_once "inc/cabecalho.php";
-?>
+use Microblog\ControleDeAcesso;
+use Microblog\Usuario;
+use Microblog\Utilitarios;
 
+require_once "inc/cabecalho.php";
+
+if( isset($_GET['campos_obrigatorios'])){
+	$feedback = "Você deve preencher os campos!";
+
+} elseif ( isset($_GET['dados_incorretos']) ){
+	$feedback = "e-mail ou senha incorretos";
+
+} elseif(isset($_GET['logout'])) {
+	$feedback = "você saiu do sistema";
+} elseif (isset($_GET['acesso_proibido'])) {
+	$feedback = "Você deve logar primeiro";
+}
+
+?>
 
 <div class="row">
     <div class="bg-white rounded shadow col-12 my-1 py-4">
@@ -9,9 +25,11 @@ require_once "inc/cabecalho.php";
 
         <form action="" method="post" id="form-login" name="form-login" class="mx-auto w-50">
 
-                
-				<p class="my-2 alert alert-warning text-center"></p>
-
+				<?php if( isset($feedback) ){ ?>
+				<p class="my-2 alert alert-danger text-center">
+					<?=$feedback?>
+				</p>
+				<?php } ?>
 				<div class="mb-3">
 					<label for="email" class="form-label">E-mail:</label>
 					<input class="form-control" type="email" id="email" name="email">
@@ -24,6 +42,35 @@ require_once "inc/cabecalho.php";
 				<button class="btn btn-primary btn-lg" name="entrar" type="submit">Entrar</button>
 
 			</form>
+
+	<?php
+		if(isset($_POST['entrar'])){
+			if(empty($_POST['email']) || empty($_POST['senha'])){
+				header("location:login.php?campos_obrigatorios");
+			} else {
+
+				$usuario = new Usuario;
+				$usuario->setEmail($_POST['email']);
+
+				$dados = $usuario->buscar();
+				
+				if(!$dados){
+					header("location:login.php?dados_incorretos");
+				} else {
+					if(password_verify($_POST['senha'], $dados['senha'])){
+						
+						$sessao = new ControleDeAcesso;
+						$sessao->login($dados['id'], $dados['nome'], $dados['tipo']);
+						header("location:admin/index.php");
+					} else {
+						header("location:login.php?dados_incorretos");
+					}
+				}
+
+			}
+		}
+	?>
+
     </div>
     
     

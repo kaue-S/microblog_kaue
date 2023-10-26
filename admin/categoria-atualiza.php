@@ -1,5 +1,16 @@
 <?php 
 require_once "../inc/cabecalho-admin.php";
+use Microblog\Categoria;
+$categoria = new Categoria;
+
+$categoria->setId($_GET['id']);
+
+if(isset($_POST['atualizar'])){
+	$categoria->setNome($_POST['nome']);
+	$categoria->atualizar();
+
+	header("location:categorias.php");
+}
 ?>
 
 

@@ -2,6 +2,7 @@
 require_once "../inc/cabecalho-admin.php";
 require_once "../vendor/autoload.php";
 use Microblog\Usuario;
+$sessao->verificaAcessoAdmin();
 $usuario = new Usuario;
 
 $usuario->setId($_GET['id']);
