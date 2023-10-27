@@ -1,5 +1,7 @@
 <?php
 
+use Microblog\Utilitarios;
+
     $todasAsNoticias = $noticia->listarTodas();
 
 ?>
@@ -14,7 +16,10 @@
 
                 <?php foreach( $todasAsNoticias as $noticias ){ ?>
                     <a href="noticia.php?id=<?=$noticias['id']?>" class="list-group-item list-group-item-action">
-                         <h3 class="fs-6"><time><?=$noticias['data']?></time> | <?=$noticias['titulo']?></h3>
+                         <h3 class="fs-6">
+                            <time>
+                                <?=Utilitarios::formataData($noticias['data'])?>
+                            </time> | <?=$noticias['titulo']?></h3>
                         <p><?=$noticias['resumo']?></p>
                     </a>
                 <?php }?>
