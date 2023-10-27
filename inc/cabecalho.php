@@ -60,10 +60,15 @@ ob_start();
         </li>
       </ul>
 
-      <form autocomplete="off" class="d-flex" action="resultados.php" method="GET">
-        <input class="form-control me-2" type="search" placeholder="Pesquise aqui" name="busca" aria-label="Pesquise aqui">
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">OK</button>
-      </form>
+      <div class="position-relative">
+
+        <form autocomplete="off" class="d-flex" action="resultados.php" method="POST" onsubmit="return false" id="form-busca">
+          <input id="campo-busca" class="form-control me-2" type="search" placeholder="Pesquise aqui" name="busca" aria-label="Pesquise aqui">
+        </form>
+
+        <div id="resultados" class="mt-1 p-2 position-absolute container bg-white shadow-lg rounded"></div>
+
+      </div>
       
 
     </div>
