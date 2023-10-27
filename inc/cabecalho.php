@@ -1,5 +1,13 @@
 <?php 
+ob_start();
   require_once "vendor/autoload.php";
+  use Microblog\Noticia;
+  use Microblog\Utilitarios;
+
+  $noticia = new Noticia;
+
+  $listaDeCategorias = $noticia->categoria->ler();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br" class="h-100">
@@ -36,9 +44,15 @@
             Categorias
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Ciência</a></li>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Educação</a></li>
-            <li><a class="dropdown-item" href="noticias-por-categoria.php">Tecnologia</a></li>
+
+            <?php foreach( $listaDeCategorias as $categorias ){ ?>
+
+              <li>
+                <a class="dropdown-item" href="noticias-por-categoria.php?id=<?=$categorias['id']?>"><?=$categorias['nome']?></a>
+              </li>
+
+            <?php } ?>
+            
           </ul>
         </li>
         <li class="nav-item">
@@ -46,10 +60,12 @@
         </li>
       </ul>
 
-      <form autocomplete="off" class="d-flex" action="resultados.php" method="POST">
-        <input class="form-control me-2" type="search" placeholder="Pesquise aqui" aria-label="Pesquise aqui">
+      <form autocomplete="off" class="d-flex" action="resultados.php" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Pesquise aqui" name="busca" aria-label="Pesquise aqui">
         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">OK</button>
       </form>
+      
+
     </div>
   </div>
 </nav>
