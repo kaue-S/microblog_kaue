@@ -65,7 +65,6 @@ ob_start();
         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">OK</button>
       </form>
       
-
     </div>
   </div>
 </nav>
